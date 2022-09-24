@@ -14,8 +14,6 @@ namespace Lab_APIs.Models
 
         }
 
-        public virtual DbSet<Route> Routes { get; set; } = null!;
-        public virtual DbSet<ScheduledStop> ScheduledStops { get; set; } = null!;
-        public virtual DbSet<Stop> Stops { get; set; } = null!;
+        
     }
 }

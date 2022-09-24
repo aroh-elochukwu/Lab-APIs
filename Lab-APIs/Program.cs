@@ -1,25 +1,32 @@
-using Lab_APIs.Models;
-using Microsoft.EntityFrameworkCore;
+using System.IO;
 
-#region SERVICES
+string path = @"C:\Users\eloch\Downloads\theMachineStops.txt";
 
-var builder = WebApplication.CreateBuilder(args);
+FileInfo newFile = new FileInfo(path);
 
-builder.Services.AddDbContext<LabApiContext>(options =>
+
+using (StreamWriter writer = newFile.CreateText())
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LabApiContext"));
-});
+    writer.WriteLine("Hello world!");
+    
+}
 
-var app = builder.Build();
+string line = " ";
 
-#endregion
+try
+{
+    using (StreamReader reader = newFile.OpenText())
+    {
 
-app.MapGet("/routes", async () => "Hello world!");
+        line = reader.ReadLine();
 
-
-
-
-
-
-
-app.Run();
+        while (!String.IsNullOrWhiteSpace(line))
+        {
+            line = reader.ReadLine();
+        }
+    }
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
